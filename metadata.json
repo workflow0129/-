@@ -1,0 +1,6 @@
+{
+  "name": "국민취업지원제도 상담일지 보조기",
+  "description": "국민취업지원제도 상담사의 상담일지 작성을 돕는 스마트 보조 도구입니다. 양식 자동 완성 및 직업심리검사 PDF 결과 분석을 지원합니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
