@@ -16,7 +16,7 @@ app.use(express.urlencoded({ limit: "15mb", extended: true }));
 // Helper to get Gemini Client with optional user-supplied API key
 const getAiClient = (req: express.Request) => {
   const userKey = req.headers["x-gemini-api-key"] as string;
-  const apiKey = userKey && userKey.trim() !== "" ? userKey.trim() : null;
+  const apiKey = userKey && userKey.trim() !== "" ? userKey.trim() : process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error("Gemini API Key가 설정되지 않았거나 비활성화 상태입니다. 앱 상단의 'Gemini Key 등록필요' 버튼을 클릭하여 API Key를 등록하고 인증해 주세요.");
   }
@@ -56,7 +56,7 @@ app.post("/api/verify-api-key", async (req, res) => {
 
     // 빠른 유효성 테스트를 위해 초경량 호출 시도
     const response = await testAi.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: "API Key verification. Reply only with OK.",
     });
 
@@ -113,7 +113,7 @@ app.post("/api/analyze-pdf", async (req, res) => {
 
     const aiClient = getAiClient(req);
     const response = await aiClient.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: [
         {
           inlineData: {
@@ -189,7 +189,7 @@ app.post("/api/refine-text", async (req, res) => {
 
     const aiClient = getAiClient(req);
     const response = await aiClient.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction,
@@ -511,7 +511,7 @@ app.post("/api/parse-job-post", async (req, res) => {
 
     const aiClient = getAiClient(req);
     const response = await aiClient.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: contents,
       config: {
         responseMimeType: "application/json",
