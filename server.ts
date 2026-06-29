@@ -56,7 +56,7 @@ app.post("/api/verify-api-key", async (req, res) => {
 
     // 빠른 유효성 테스트를 위해 초경량 호출 시도
     const response = await testAi.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.5-flash",
       contents: "API Key verification. Reply only with OK.",
     });
 
